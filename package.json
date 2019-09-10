@@ -1,0 +1,18 @@
+{
+  "name": "portfolio-tracking-api",
+  "version": "1.0.0",
+  "description": "A Node.js RESTful API for tracking stock portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./server.js"
+  },
+  "author": "Jebin Philipose",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
+}
