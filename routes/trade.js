@@ -8,4 +8,7 @@ const router = express.Router();
 // Place a trade
 router.post('/', validate(validation.addTrade), controller.addTrade);
 
+// Remove a trade
+router.delete('/:id', validate(validation.removeTrade), controller.removeTrade);
+
 module.exports = router;

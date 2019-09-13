@@ -1,4 +1,5 @@
 const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
 module.exports = {
   addTrade: {
@@ -9,6 +10,11 @@ module.exports = {
         .required(),
       quantity: Joi.number().min(1).required(),
       price: Joi.number().min(0).default(100),
+    },
+  },
+  removeTrade: {
+    params: {
+      id: Joi.objectId(),
     },
   },
 };

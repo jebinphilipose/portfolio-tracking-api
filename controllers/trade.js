@@ -44,6 +44,21 @@ const sellSecurity = async (tickerSymbol, action, quantity) => {
   return trade;
 };
 
+const removeTradeFromPortfolio = async (trade, portfolio) => {
+  // Update portfolio accordingly
+  if (trade.action === 'BUY') {
+    portfolio.avgBuyPrice = ((portfolio.avgBuyPrice * portfolio.quantity - trade.price * trade.quantity) / (portfolio.quantity - trade.quantity)) || 0;
+    portfolio.quantity -= trade.quantity;
+    portfolio = await portfolio.save();
+  } else {
+    portfolio.quantity += trade.quantity;
+    portfolio = await portfolio.save();
+  }
+  // Remove trade
+  trade = await Trade.findByIdAndRemove(trade.id);
+  return trade;
+};
+
 module.exports = {
   addTrade: async (req, res) => {
     const {
@@ -68,5 +83,13 @@ module.exports = {
       return res.status(201).json(trade);
     }
     return res.status(400).json(requestError(400, 'Insufficient quantity of shares in portfolio'));
+  },
+  removeTrade: async (req, res) => {
+    let trade = await Trade.findById(req.params.id);
+    if (!trade) return res.status(400).json(requestError(400, 'Trade with given id not found.'));
+    const portfolio = await Portfolio.findOne({ tickerSymbol: trade.tickerSymbol });
+    if (trade.action === 'BUY' && portfolio.quantity - trade.quantity < 0) return res.status(400).json(requestError(400, 'Sorry, cannot remove this trade! Insufficient quantity of shares in portfolio.'));
+    trade = await removeTradeFromPortfolio(trade, portfolio);
+    return res.status(200).json(trade);
   },
 };
