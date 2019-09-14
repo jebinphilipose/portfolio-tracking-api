@@ -11,4 +11,7 @@ router.post('/', validate(validation.addTrade), controller.addTrade);
 // Remove a trade
 router.delete('/:id', validate(validation.removeTrade), controller.removeTrade);
 
+// Update a trade
+router.put('/:id', validate(validation.updateTrade), controller.updateTrade);
+
 module.exports = router;
