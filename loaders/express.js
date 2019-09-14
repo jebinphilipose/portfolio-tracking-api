@@ -25,6 +25,9 @@ app.use(compression());
 // For logging requests
 app.use(morgan('dev'));
 
+// Add a link for API doc
+app.get('/', (req, res) => res.send('API documentation can be found <a href="https://documenter.getpostman.com/view/3899486/SVmtxKT6">here</a>'));
+
 // Register routes
 app.use('/api', routes);
 
