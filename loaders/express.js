@@ -1,5 +1,7 @@
 const helmet = require('helmet');
 const cors = require('cors');
+const compression = require('compression');
+const morgan = require('morgan');
 const express = require('express');
 require('express-async-errors');
 const routes = require('../routes');
@@ -16,6 +18,12 @@ app.use(helmet());
 
 // For enabling CORS
 app.use(cors());
+
+// For compressing response body
+app.use(compression());
+
+// For logging requests
+app.use(morgan('dev'));
 
 // Register routes
 app.use('/api', routes);

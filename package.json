@@ -22,6 +22,7 @@
   "author": "Jebin Philipose",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
@@ -29,7 +30,8 @@
     "helmet": "^3.21.0",
     "joi": "^14.3.1",
     "joi-objectid": "^2.0.0",
-    "mongoose": "^5.7.0"
+    "mongoose": "^5.7.0",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
