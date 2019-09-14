@@ -19,4 +19,9 @@ module.exports = {
     const holdings = await Portfolio.find({ quantity: { $ne: 0 } }).select('-_id -__v');
     return res.status(200).json(holdings);
   },
+  getReturns: async (req, res) => {
+    const securities = await Portfolio.find({ quantity: { $ne: 0 } }).select('-_id -__v');
+    const returns = securities.reduce((acc, doc) => acc + ((100 - doc.avgBuyPrice) * doc.quantity), 0);
+    return res.status(200).json({ returns });
+  },
 };

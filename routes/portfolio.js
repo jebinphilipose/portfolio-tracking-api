@@ -9,4 +9,7 @@ router.get('/portfolio', controller.getPortfolio);
 // Fetch holdings
 router.get('/holdings', controller.getHoldings);
 
+// Fetch returns
+router.get('/returns', controller.getReturns);
+
 module.exports = router;
