@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server.js",
     "dev": "nodemon ./server.js",
     "lint": "eslint './**/*.js' --fix"
+  },
+  "engines": {
+    "node": "12.8.0"
   },
   "lint-staged": {
     "**/*.js": [
